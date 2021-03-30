@@ -7,7 +7,7 @@ module Madmin
       end
 
       def resource
-        "#{to_model.name}Resource".constantize
+        "#{attribute_name.to_s.singularize.camelize}Resource".constantize
       end
 
       def to_param
@@ -20,10 +20,6 @@ module Madmin
         end
 
         "/madmin/fields/#{self.class.field_type}/#{name}"
-      end
-
-      def to_model
-        attribute_name.to_s.singularize.classify.constantize
       end
 
       private
