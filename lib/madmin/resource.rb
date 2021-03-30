@@ -166,11 +166,14 @@ module Madmin
 
         if model.attribute_types.include?(name_string)
           column_type = model.attribute_types[name_string]
-          if column_type.is_a? ActiveRecord::Enum::EnumType
-            :enum
-          else
+          # TODO fix this
+          # Exception Causes
+          # NameError: uninitialized constant Madmin::ActiveRecord::Enum
+          # if column_type.is_a? ActiveRecord::Enum::EnumType
+          #   :enum
+          # else
             column_type.type || :string
-          end
+          # end
         elsif (association = model.reflect_on_association(name))
           type_for_association(association)
         elsif model.reflect_on_association(:"rich_text_#{name_string}")
